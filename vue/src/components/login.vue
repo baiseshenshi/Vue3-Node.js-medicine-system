@@ -13,12 +13,56 @@ const router = useRouter()
 const username = ref()
 const password = ref()
 
+function formatDate(time,format='YY-MM-DD hh:mm:ss'){
+	const date = new Date(time);
+
+	const year = date.getFullYear(),
+		month = date.getMonth()+1,//月份是从0开始的
+		day = date.getDate(),
+		hour = date.getHours(),
+		min = date.getMinutes(),
+		sec = date.getSeconds();
+	const preArr = Array.apply(null,Array(10)).map(function(elem, index) {
+		return '0'+index;
+	});
+
+	const newTime = format.replace(/YY/g,year)
+						.replace(/MM/g,preArr[month]||month)
+						.replace(/DD/g,preArr[day]||day)
+						.replace(/hh/g,preArr[hour]||hour)
+						.replace(/mm/g,preArr[min]||min)
+						.replace(/ss/g,preArr[sec]||sec);
+
+	return newTime;			
+}
+
 // 点击后发送请求
 const go = async (username, password) => {
+    
     if (!username || !password) {
         alert("用户名或密码未输入")
         return
     }
+    const msg = {};
+    await fetch('http://ip-api.com/json')
+        .then(res => res.json())
+        .then(res => {
+            msg.ip = res.query
+            if (res.city === "Nanchang") {
+                msg.city = "江西省" + "南昌市"
+            }
+            msg.time = formatDate(Date.now())
+        })
+        .catch(err => console.log(err))
+
+    $axios.post('http://localhost:3000/homepage/loginlog',{
+        loginLog:{
+            no: username,
+            ip: msg.ip,
+            createtime: msg.time,
+            location: msg.city
+        }
+    })
 
     username = username.split(" ").join("")
     password = password.split(" ").join("")

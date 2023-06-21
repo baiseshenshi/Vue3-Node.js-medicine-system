@@ -8,15 +8,21 @@ const props = defineProps(['active'])
     <div class="aside">
         <nav>
             <ul>
-                <router-link to="/prime/master" class="master">
+                <router-link to="/prime/homepage" class="master">
                     <li :class="{ active: props.active === 0 }" 
                     @click="() => $emit('activeChange', 0)">
                         首页
                     </li>
                 </router-link>
-                <router-link to="/prime/master/msg" class="msg">
-                    <li :class="{ active: props.active === 1 }" 
+                <router-link to="/prime/homepage/master" class="homepage">
+                    <li :class="{active: props.active === 1}"
                     @click="() => $emit('activeChange', 1)">
+                        药品信息
+                    </li>
+                </router-link>
+                <router-link to="/prime/homepage/msg" class="msg">
+                    <li :class="{ active: props.active === 2 }" 
+                    @click="() => $emit('activeChange', 2)">
                         销售/进货信息
                     </li>
                 </router-link>
@@ -58,9 +64,14 @@ ul li:hover {
 }
 
 .master,
-.msg{
+.msg,
+.homepage{
     text-decoration: none;
     color: black;
+}
+
+.homepage li{
+    padding-left: 50px;
 }
 
 .master li{

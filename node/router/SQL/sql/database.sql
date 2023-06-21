@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS `administrator`;
 
 CREATE TABLE `administrator` (
   `aID` char(10) NOT NULL,
-  `aName` char(20) DEFAULT NULL,
+  `aName` char(20) DEFAULT NULL,administrator
   `aAccountar` char(20) NOT NULL,
   `aPassword` char(20) NOT NULL,
   PRIMARY KEY (`aID`)

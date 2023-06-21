@@ -2,6 +2,7 @@ import login from '../components/login.vue';
 import prime from '../components/prime.vue';
 import Master from '../components/Main/Master/Master.vue';
 import Msg from '../components/Main/Msg/Msg.vue';
+import HomePage from '../components/Main/HomePage/HomePage.vue';
 
 import axios from 'axios';
 
@@ -27,6 +28,10 @@ const routes = [
         children: [
             {
                 path: '',
+                component: HomePage
+            },
+            {
+                path: 'master',
                 component: Master
             },
             {

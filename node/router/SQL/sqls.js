@@ -10,7 +10,11 @@ const sqls = [
     // 修改数据
     'update drug set dName=?,dType=?,dFrom=?,dUsage=?,dTaboo=? where dID=?',
     // 查询药品类型
-    'select * from drug where dFrom=?'
+    'select * from drug where dFrom=?',
+    // 登录日志
+    'select * from t_loginlog order by id DESC limit 5',
+    'select id from t_loginlog order by id DESC limit 1',
+    'insert into t_loginlog values(?,?,?,?,?)'
 ]
 
 module.exports = sqls

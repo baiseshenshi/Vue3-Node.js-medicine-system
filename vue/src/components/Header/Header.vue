@@ -22,6 +22,11 @@ const greet = computed(() => {
 
     return msg
 })
+
+const sessionGOZore = () => {
+    sessionStorage.removeItem("username")
+    sessionStorage.removeItem("key")
+}
 </script>
 
 <template>
@@ -30,6 +35,9 @@ const greet = computed(() => {
             <div class="img">
                 <img src="/img/admin.png" alt="">
                 <span>{{ greet + username }}</span>
+                <a href="" @click.prevent="sessionGOZore()">
+                    <router-link to="/" style="color: red; font-size: 20px;" replace>注销</router-link>
+                </a>
             </div>
             <div>
                 <h1>药品管理系统</h1>
@@ -42,7 +50,7 @@ const greet = computed(() => {
 header .head {
     width: 100%;
     height: 100px;
-    background-color:#4A5B6B;
+    background-color: #4A5B6B;
 }
 
 header .info {
